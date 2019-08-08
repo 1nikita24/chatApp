@@ -1,4 +1,4 @@
-"mongodb://localhost:27017/simple-chat"
+// "mongodb://localhost:27017/simple-chat"
 var express = require('express');
 var bodyParser = require('body-parser')
 var app = express();
@@ -16,7 +16,7 @@ var Message = mongoose.model('Message', {
     message: String
 })
 
-var dbUrl = process.env.dbUrl || "mongodb://localhost:27017/simple-chat"
+var dbUrl = process.env.dbUrl || "mongodb+srv://1nikita24:May04month@cluster0-qf5om.mongodb.net/test?retryWrites=true&w=majority"
 
 app.get('/messages', (req, res) => {
     Message.find({}, (err, messages) => {
