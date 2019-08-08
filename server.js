@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser')
 var app = express();
+const PORT = process.env.PORT || 3000;
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var mongoose = require('mongoose');
@@ -62,7 +63,4 @@ io.on('connection', () => {
 mongoose.connect(dbUrl, { useMongoClient: true }, (err) => {
     console.log('mongodb connected', err);
 })
-
-var server = http.listen(3000, () => {
-    console.log('server is running on port', server.address().port);
-});
+app.listen(PORT, () => console.log(`You are now on localhost:${PORT}.`));
