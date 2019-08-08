@@ -5,6 +5,7 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var mongoose = require('mongoose');
+const PORT = process.env.PORT || 3000;
 
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
@@ -15,7 +16,7 @@ var Message = mongoose.model('Message', {
     message: String
 })
 
-var dbUrl = process.env.dburl || "mongodb://localhost:27017/simple-chat"
+var dbUrl = process.env.dbUrl || "mongodb://localhost:27017/simple-chat"
 
 app.get('/messages', (req, res) => {
     Message.find({}, (err, messages) => {
@@ -63,7 +64,6 @@ io.on('connection', () => {
 mongoose.connect(dbUrl, { useMongoClient: true }, (err) => {
     console.log('mongodb connected', err);
 })
-
-var server = http.listen(3000, () => {
+var server = http.listen(PORT, () => {
     console.log('server is running on port', server.address().port);
 });
