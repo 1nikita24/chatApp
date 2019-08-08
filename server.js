@@ -1,4 +1,5 @@
 // "mongodb://localhost:27017/simple-chat"
+// "mongodb+srv://1nikita24:May04month@cluster0-qf5om.mongodb.net/test?retryWrites=true&w=majority"
 var express = require('express');
 var bodyParser = require('body-parser')
 var app = express();
@@ -16,7 +17,7 @@ var Message = mongoose.model('Message', {
     message: String
 })
 
-var dbUrl = process.env.MONGODB_URI || "mongodb+srv://1nikita24:May04month@cluster0-qf5om.mongodb.net/test?retryWrites=true&w=majority"
+var dbUrl = process.env.dbUrl || "mongodb://localhost:27017/simple-chat"
 
 app.get('/messages', (req, res) => {
     Message.find({}, (err, messages) => {
